@@ -26,14 +26,6 @@ bool contains(std::string s, std::string sub) {
     return false;
 }
 
-int first_occurrence(std::string s, std::string sub){
-    std::vector<bool> x = find_substring(s,sub);
-    for (int i=0; i<x.size(); i++){
-        if (x[i]) return i;
-    }
-    return -1;
-}
-
 std::vector<bool> find_substring(std:: string s, std::string sub) {
     std::vector<int> pi((int)s.length());
     std::vector<bool> index_found((int)s.length());
@@ -46,6 +38,14 @@ std::vector<bool> find_substring(std:: string s, std::string sub) {
             index_found[i - 2*(int)sub.length()] = false;
     }
     return index_found;
+}
+
+int first_occurrence(std::string s, std::string sub){
+    std::vector<bool> x = find_substring(s,sub);
+    for (int i=0; i<x.size(); i++){
+        if (x[i]) return i;
+    }
+    return -1;
 }
 
 bool equal(std:: string s, std::string sub) {
