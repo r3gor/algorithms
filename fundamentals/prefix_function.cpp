@@ -16,6 +16,24 @@ std::vector<int> prefix_function(std::string s) {
     return pi;
 }
 
+bool contains(std::string s, std::string sub) {
+    s = sub + '#' + s;
+    std::vector<int> pi = prefix_function(s);
+    for (int i:pi){
+        if (i==sub.size())
+            return true;
+    }
+    return false;
+}
+
+int first_occurrence(std::string s, std::string sub){
+    std::vector<bool> x = find_substring(s,sub);
+    for (int i=0; i<x.size(); i++){
+        if (x[i]) return i;
+    }
+    return -1;
+}
+
 std::vector<bool> find_substring(std:: string s, std::string sub) {
     std::vector<int> pi((int)s.length());
     std::vector<bool> index_found((int)s.length());
@@ -28,6 +46,14 @@ std::vector<bool> find_substring(std:: string s, std::string sub) {
             index_found[i - 2*(int)sub.length()] = false;
     }
     return index_found;
+}
+
+bool equal(std:: string s, std::string sub) {
+    if (s.size()!=sub.size()) return false;
+    std::vector<int> pi(s.length());
+    s = sub + '#' + s;
+    pi = prefix_function(s);
+    return pi.back() == sub.length(); 
 }
 
 int main() { /* TEST */
